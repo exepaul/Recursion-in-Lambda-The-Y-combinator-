@@ -14,7 +14,13 @@ Why its recursion ?
 
 Answer :
 
-X = (λx. f (x x))(λx. f (x x))
-X = f (x x) [x := λx. f (x x)]
-X = f ((λx. f (x x)) (λx. f (x x)))
-X = f X
+If we pass a function itself as its argument then what happens :
+
+- X = (λx. f (x x))(λx. f (x x))
+- X = f (x x) [x := λx. f (x x)]
+- X = f ((λx. f (x x)) (λx. f (x x)))
+- X = f X
+
+Given this, we can build a function that returns a fixed-point for any function f by taking the function in as an argument:
+λf. (λx. f (x x))(λx. f (x x))
+And that right there is the Y combinator. It’s a function that will return a fixed-point for any input function f. Let’s call it Y. For any function f, Yf is a fixed-point of f. That is, f(Yf) is equivalent to Yf. In fact, another name for the Y combinator is the fixed-point combinator for this reason.
